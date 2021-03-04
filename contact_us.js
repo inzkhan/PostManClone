@@ -1,0 +1,82 @@
+console.log("this is contact us js");
+
+  let firstName = document.getElementById("firstName").value;
+  let lastName = document.getElementById("lastName").value;
+  let email = document.getElementById("email");
+  let phone = document.getElementById("phone");
+  let description = document.getElementById("message").value;
+  console.log(firstName, lastName, email, phone, description);
+ 
+let validEmail = false;
+let validPhone = false;
+
+$('#failure').hide();
+$('#success').hide();
+
+email.addEventListener('blur', ()=>{
+  console.log("email is blurred");
+  // Validate email here
+  let regex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+  let str = email.value;
+  console.log(regex, str);
+  if(regex.test(str)){
+      console.log('Your email is valid');
+      email.classList.remove('is-invalid');
+      validEmail = true;
+  }
+  else{
+      console.log('Your email is not valid');
+      email.classList.add('is-invalid');
+      validEmail = false;
+  }
+})
+phone.addEventListener('blur', ()=>{
+  console.log("phone is blurred");
+  // Validate phone here
+  let regex = /^([0-9]){11}$/;
+  let str = phone.value;
+  console.log(regex, str);
+  if(regex.test(str)){
+      console.log('Your phone is valid');
+      phone.classList.remove('is-invalid');
+      validPhone = true;
+  }
+  else{
+      console.log('Your phone is not valid');
+      phone.classList.add('is-invalid');
+      validPhone = false;
+      
+  }
+})
+let submit = document.getElementById("submit");
+submit.addEventListener("click", (e) => {
+  e.preventDefault();
+  console.log("you clicked on submit button");
+
+ // Submit your form here
+ if(validEmail  && validPhone){
+  let failure = document.getElementById('failure');
+
+  console.log('Phone, email are valid. Submitting the form');
+  let success = document.getElementById('success');
+  success.classList.add('show');
+  // failure.classList.remove('show');
+  // $('#failure').alert('close');
+  $('#failure').hide();
+  $('#success').show();
+  
+}
+else{
+  console.log('One of Phone, email  are not valid. Hence not submitting the form. Please correct the errors and try again');
+  let failure = document.getElementById('failure');
+  failure.classList.add('show');
+  // success.classList.remove('show');
+  // $('#success').alert('hide');
+  $('#success').hide();
+  $('#failure').show();
+  }
+
+
+
+})
+
